@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			body {
+				margin: 0;
+			}
+			.container {
+				width: 100%;
+				height: 100vh;
+				background: rgb(16, 16, 94);
+				position: relative;
+				overflow: hidden;
+			}
+
+			/* snow */
+
+			/* .container .snowFlake {
+				top: 0;
+				left: -10rem;
+				position: absolute;
+				border-radius: 50%;
+				width: 0.4rem;
+				height: 0.4rem;
+				background: white;
+				animation: snowing infinite linear 3s;
+			} */
+
+			/* rain */
+
+			.girl {
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100%;
+				width: 100%;
+			}
+
+			.drop {
+				width: 0.2rem;
+				height: 0.2rem;
+			}
+
+			.container .snowFlake {
+				top: -2rem;
+				position: absolute;
+				width: 0.02rem;
+				height: 0.5rem;
+				background: white;
+				transform: rotateZ(-10deg);
+				animation: snowing infinite linear 3s;
+			}
+
+			@keyframes snowing {
+				0% {
+					/* top: 0; */
+					margin-left: -5rem;
+					margin-top: 0;
+				}
+
+				100% {
+					/* top: 100%; */
+					margin-left: 10rem;
+					margin-top: 100%;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<img class="girl" src="./img/140510.jpg" alt="" />
+		</div>
+	</body>
+	<script>
+		console.log('working');
+
+		let container = document.querySelector('.container');
+
+		for (let n = 0; n < 1000; n++) {
+			let rainDropSrc = './img/drop.png';
+			let snowflake = document.createElement('div');
+			container.append(snowflake);
+			snowflake.className = 'snowFlake';
+			let drop = document.createElement('img');
+			drop.src = rainDropSrc;
+			drop.className = 'drop';
+			snowflake.append(drop);
+		}
+
+		// speed version
+
+		let snowFlakes = document.querySelectorAll('.snowFlake');
+		for (let i = 0; i < snowFlakes.length; i++) {
+			let number = Math.random(5) * 10;
+			if (number < 0.2) {
+				number = 0.2;
+			} else if (number > 0.6) {
+				number = 0.6;
+			}
+			snowFlakes[i].style.animationDuration = `${number}s`;
+			snowFlakes[i].style.left = `${Math.random(0) * 100}%`;
+			snowFlakes[i].style.animationDelay = `${Math.random(5) * 10}s`;
+		}
+
+		let rainDroplits = document.querySelectorAll('.snowFlake');
+		for (let i = 0; i < rainDroplits.length; i++) {
+			let number = Math.random(1) * 2;
+			console.log(number);
+
+			if (number <= 0.2) {
+				number = 0.2;
+			} else if (number >= 1.4) {
+				number = 1.4;
+			}
+			rainDroplits[i].style.transform = `scale(${number})`;
+		}
+
+		// snow
+
+		// let snowFlakes = document.querySelectorAll('.snowFlake');
+		// for (let i = 0; i < snowFlakes.length; i++) {
+		// 	let number = Math.random(5) * 10;
+		// 	if (number < 1) number = 1;
+		// 	snowFlakes[i].style.animationDuration = `${number}s`;
+		// 	snowFlakes[i].style.left = `${Math.random(-4) * 30}rem`;
+		// 	snowFlakes[i].style.animationDelay = `${Math.random(5) * 10}s`;
+		// }
+	</script>
+</html>
