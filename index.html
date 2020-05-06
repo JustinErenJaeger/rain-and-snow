@@ -40,21 +40,65 @@
 			}
 
 			.drop {
-				width: 0.2rem;
-				height: 0.2rem;
+				width: 0.4rem;
+				height: 0.8rem;
 			}
 
-			.container .snowFlake {
+			.flake {
+				width: 1rem;
+				height: 1rem;
+			}
+
+			.rainBtn,
+			.snowBtn {
+				position: absolute;
+				top: 50%;
+				width: 6rem;
+				height: 3rem;
+				border-radius: 0.2rem;
+				z-index: 1000;
+			}
+
+			.rainBtn {
+				left: 50%;
+				background: rgb(40, 40, 255);
+				color: white;
+				transform: translateX(10%);
+			}
+
+			.rainBtn:hover {
+				background: rgb(73, 182, 255);
+			}
+
+			.snowBtn {
+				right: 50%;
+				background: rgb(255, 255, 255);
+				color: rgb(0, 0, 0);
+				transform: translateX(-10%);
+			}
+
+			.snowBtn:hover {
+				background: rgb(196, 196, 196);
+			}
+
+			span {
+				font-family: Arial, Helvetica, sans-serif;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+			}
+
+			.container .rainDrop {
 				top: -2rem;
 				position: absolute;
-				width: 0.02rem;
-				height: 0.5rem;
-				background: white;
+				width: 1rem;
+				height: 1rem;
 				transform: rotateZ(-10deg);
-				animation: snowing infinite linear 3s;
+				animation: raining infinite linear 3s;
 			}
 
-			@keyframes snowing {
+			@keyframes raining {
 				0% {
 					/* top: 0; */
 					margin-left: -5rem;
@@ -67,56 +111,240 @@
 					margin-top: 100%;
 				}
 			}
+
+			.container .snowFlake {
+				top: -2rem;
+				position: absolute;
+				width: 0.02rem;
+				height: 0.5rem;
+				transform: rotateZ(-10deg);
+				animation: snowing infinite ease-in-out 3s;
+			}
+
+			@keyframes snowing {
+				0% {
+					/* top: 0; */
+					margin-left: -2rem;
+					margin-top: 0;
+				}
+
+				10% {
+					margin-left: 0rem;
+				}
+
+				20% {
+					margin-left: 10rem;
+				}
+
+				30% {
+					margin-left: 0rem;
+				}
+
+				40% {
+					margin-left: -1rem;
+				}
+
+				50% {
+					margin-left: 0rem;
+				}
+
+				60% {
+					margin-left: 4rem;
+				}
+
+				70% {
+					margin-left: 0rem;
+				}
+
+				80% {
+					margin-left: -3rem;
+				}
+
+				90% {
+					margin-left: 0rem;
+				}
+
+				100% {
+					margin-left: 4rem;
+					margin-top: 100%;
+				}
+			}
 		</style>
 	</head>
 	<body>
 		<div class="container">
 			<img class="girl" src="./img/140510.jpg" alt="" />
+			<div class="rainBtn" onclick="rainToggle()">
+				<span>RAIN</span>
+			</div>
+			<div class="snowBtn" onclick="snowToggle()">
+				<span>SNOW</span>
+			</div>
 		</div>
 	</body>
 	<script>
 		console.log('working');
 
 		let container = document.querySelector('.container');
+		let rainBtn = document.querySelector('.rainBtn');
+		let snowBtn = document.querySelector('.snowBtn');
+		let rain = './img/drop.png';
+		let snow = './img/snow.png';
 
-		for (let n = 0; n < 1000; n++) {
-			let rainDropSrc = './img/drop.png';
-			let snowflake = document.createElement('div');
-			container.append(snowflake);
-			snowflake.className = 'snowFlake';
-			let drop = document.createElement('img');
-			drop.src = rainDropSrc;
-			drop.className = 'drop';
-			snowflake.append(drop);
+		let condition = null;
+		let color = null;
+
+		for (let x = 0; x < 500; x++) {
+			let element = document.createElement('div');
+			let img = document.createElement('img');
+			container.append(element);
+			element.append(img);
+			element.id = 'divs';
+			img.id = 'imgs';
+			// element.className = 'test';
+			// element.id = 'theDiv';
+			// img.src = path;
+			// img.className = 'theImg';
+		}
+
+		// GETS ALL THE IMAGE TAGS
+		let divs = document.querySelectorAll('#divs');
+		let imgs = document.querySelectorAll('#imgs');
+		// console.log('divs: ', divs.length);
+		// console.log('imgs: ', imgs.length);
+
+		function setProperties(path, elementClass, imgClass) {
+			// LOOPS THROUGH ALL THE IMAGE TAGS
+			for (let x = 0; x < divs.length; x++) {
+				const allDivs = divs[x];
+				const allImgs = imgs[x];
+				console.log(elementClass);
+				console.log(allDivs.className);
+
+				if (elementClass === 'rainDrop') {
+					allImgs.src = path;
+					allImgs.className = imgClass;
+					console.log('for rain ', imgClass);
+					allDivs.className = elementClass;
+
+					let number = Math.random(5) * 10;
+
+					if (number < 0.8) {
+						number = 0.8;
+					} else if (number > 1.2) {
+						number = 1.2;
+					}
+
+					allDivs.style.animationDuration = `${number}s`;
+					allDivs.style.left = `${Math.random(0) * 100}%`;
+					allDivs.style.animationDelay = `${Math.random(5) * 10}s`;
+				} else if (elementClass === 'snowFlake') {
+					allImgs.src = path;
+					allImgs.classList.remove('rainDrop');
+					allImgs.className = imgClass;
+					console.log('for snow ', imgClass);
+
+					allDivs.classList.remove('rainDrop');
+					allDivs.className = elementClass;
+
+					let number = Math.random(5) * 10;
+					if (number < 10) {
+						number = 10;
+					} else if (number > 4) {
+						number = 4;
+					}
+
+					allDivs.style.animationDuration = `${number}s`;
+					allDivs.style.left = `${Math.random(0) * 100}%`;
+					setInterval(() => {
+						divs[Math.round(Math.random(0) * 200)].style.right = `${
+							Math.random(0) * 100
+						}%`;
+					}, 500);
+
+					allDivs.style.animationDelay = `${Math.random(5) * 10}s`;
+				}
+			}
+		}
+
+		let clicked = null;
+
+		function rainToggle() {
+			if (condition === null || 'snow') {
+				if (clicked === 'rain') prompt(`ITS ALREADY RAINING BRUV!`);
+				condition = 'rain';
+				color = 'rgb(255, 255, 255)';
+				console.log(condition);
+				rainBtn.style.border = `0.2rem solid ${color}`;
+				snowBtn.style.border = `0`;
+
+				setCondition(condition);
+			}
+
+			clicked = 'rain';
+		}
+
+		function snowToggle() {
+			if (condition === null || 'rain') {
+				if (clicked === 'snow') prompt(`ITS ALREADY SNOWING BRUV!`);
+				condition = 'snow';
+				color = 'rgb(40, 40, 255)';
+				console.log(condition);
+				snowBtn.style.border = `0.2rem solid ${color}`;
+				rainBtn.style.border = `0`;
+
+				setCondition(condition);
+				setProperties();
+			}
+
+			clicked = 'snow';
+		}
+
+		function setCondition(weather) {
+			let path = null;
+			let elementClass = null;
+			let imgClass = null;
+			if (weather === 'rain' || null) {
+				path = rain;
+				elementClass = 'rainDrop';
+				imgClass = 'drop';
+				console.log('RAIN : ', path, elementClass, imgClass);
+			} else if (weather === 'snow' || null) {
+				path = snow;
+				elementClass = 'snowFlake';
+				imgClass = 'flake';
+				console.log('SNOW : ', path, elementClass, imgClass);
+			}
+			setProperties(path, elementClass, imgClass);
 		}
 
 		// speed version
 
-		let snowFlakes = document.querySelectorAll('.snowFlake');
-		for (let i = 0; i < snowFlakes.length; i++) {
-			let number = Math.random(5) * 10;
-			if (number < 0.2) {
-				number = 0.2;
-			} else if (number > 0.6) {
-				number = 0.6;
-			}
-			snowFlakes[i].style.animationDuration = `${number}s`;
-			snowFlakes[i].style.left = `${Math.random(0) * 100}%`;
-			snowFlakes[i].style.animationDelay = `${Math.random(5) * 10}s`;
-		}
+		// let snowFlakes = document.querySelectorAll('.snowFlake');
+		// for (let i = 0; i < snowFlakes.length; i++) {
+		// 	let number = Math.random(5) * 10;
+		// 	if (number < 0.2) {
+		// 		number = 0.2;
+		// 	} else if (number > 0.6) {
+		// 		number = 0.6;
+		// 	}
+		// 	snowFlakes[i].style.animationDuration = `${number}s`;
+		// 	snowFlakes[i].style.left = `${Math.random(0) * 100}%`;
+		// 	snowFlakes[i].style.animationDelay = `${Math.random(5) * 10}s`;
+		// }
 
-		let rainDroplits = document.querySelectorAll('.snowFlake');
-		for (let i = 0; i < rainDroplits.length; i++) {
-			let number = Math.random(1) * 2;
-			console.log(number);
+		// let rainDroplits = document.querySelectorAll('.snowFlake');
+		// for (let i = 0; i < rainDroplits.length; i++) {
+		// 	let number = Math.random(1) * 2;
+		// 	console.log(number);
 
-			if (number <= 0.2) {
-				number = 0.2;
-			} else if (number >= 1.4) {
-				number = 1.4;
-			}
-			rainDroplits[i].style.transform = `scale(${number})`;
-		}
+		// 	if (number <= 0.2) {
+		// 		number = 0.2;
+		// 	} else if (number >= 1.4) {
+		// 		number = 1.4;
+		// 	}
+		// 	rainDroplits[i].style.transform = `scale(${number})`;
+		// }
 
 		// snow
 
