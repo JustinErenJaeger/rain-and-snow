@@ -1,0 +1,215 @@
+body {
+	margin: 0;
+}
+.container {
+	width: 100%;
+	height: 100vh;
+	background: rgb(16, 16, 94);
+	position: relative;
+	overflow: hidden;
+}
+
+/* snow */
+
+/* .container .snowFlake {
+    top: 0;
+    left: -10rem;
+    position: absolute;
+    border-radius: 50%;
+    width: 0.4rem;
+    height: 0.4rem;
+    background: white;
+    animation: snowing infinite linear 3s;
+} */
+
+/* rain */
+
+.bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.bg-active {
+	left: 100%;
+	animation: slider-in 1s ease forwards;
+	z-index: 0;
+}
+
+@keyframes slider-in {
+	0% {
+		left: 100%;
+	}
+
+	100% {
+		left: 0;
+	}
+}
+
+.bg-inactive {
+	left: 0;
+	animation: slider-out 1s ease forwards;
+	z-index: 0;
+}
+
+@keyframes slider-out {
+	0% {
+		left: 0;
+	}
+
+	100% {
+		left: -100%;
+	}
+}
+
+#output {
+	font-size: 5rem;
+	width: 70%;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	color: white;
+	position: absolute;
+	left: 50%;
+	top: 40%;
+	transform: translate(-50%, -50%);
+
+	z-index: 2000;
+}
+
+.laughing-emoji {
+	width: 7rem;
+	height: 7rem;
+}
+
+.drop {
+	width: 0.4rem;
+	height: 0.8rem;
+}
+
+.flake {
+	width: 1rem;
+	height: 1rem;
+}
+
+.rainBtn,
+.snowBtn {
+	position: absolute;
+	top: 70%;
+	width: 6rem;
+	height: 3rem;
+	border-radius: 0.2rem;
+	z-index: 1000;
+}
+
+.rainBtn {
+	left: 50%;
+	background: rgb(40, 40, 255);
+	color: white;
+	transform: translateX(10%);
+}
+
+.rainBtn:hover {
+	background: rgb(73, 182, 255);
+}
+
+.snowBtn {
+	right: 50%;
+	background: rgb(255, 255, 255);
+	color: rgb(0, 0, 0);
+	transform: translateX(-10%);
+}
+
+.snowBtn:hover {
+	background: rgb(196, 196, 196);
+}
+
+span {
+	font-family: Arial, Helvetica, sans-serif;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.container .rainDrop {
+	top: -2rem;
+	position: absolute;
+	width: 1rem;
+	height: 1rem;
+	transform: rotateZ(-10deg);
+	animation: raining infinite linear 3s;
+}
+
+@keyframes raining {
+	0% {
+		/* top: 0; */
+		margin-left: -5rem;
+		margin-top: 0;
+	}
+
+	100% {
+		/* top: 100%; */
+		margin-left: 10rem;
+		margin-top: 100%;
+	}
+}
+
+.container .snowFlake {
+	top: -2rem;
+	position: absolute;
+	width: 0.02rem;
+	height: 0.5rem;
+	transform: rotateZ(-10deg);
+	animation: snowing infinite ease-in-out 3s;
+}
+
+@keyframes snowing {
+	0% {
+		/* top: 0; */
+		margin-left: -2rem;
+		margin-top: 0;
+	}
+
+	10% {
+		margin-left: 0rem;
+	}
+
+	20% {
+		margin-left: 10rem;
+	}
+
+	30% {
+		margin-left: 0rem;
+	}
+
+	40% {
+		margin-left: -1rem;
+	}
+
+	50% {
+		margin-left: 0rem;
+	}
+
+	60% {
+		margin-left: 4rem;
+	}
+
+	70% {
+		margin-left: 0rem;
+	}
+
+	80% {
+		margin-left: -3rem;
+	}
+
+	90% {
+		margin-left: 0rem;
+	}
+
+	100% {
+		margin-left: 4rem;
+		margin-top: 100%;
+	}
+}
