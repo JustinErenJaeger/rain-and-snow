@@ -39,6 +39,25 @@
 				width: 100%;
 			}
 
+			#output {
+				font-size: 5rem;
+				width: 70%;
+				text-align: center;
+				font-family: Arial, Helvetica, sans-serif;
+				color: white;
+				position: absolute;
+				left: 50%;
+				top: 40%;
+				transform: translate(-50%, -50%);
+
+				z-index: 2000;
+			}
+
+			.laughing-emoji {
+				width: 7rem;
+				height: 7rem;
+			}
+
 			.drop {
 				width: 0.4rem;
 				height: 0.8rem;
@@ -52,7 +71,7 @@
 			.rainBtn,
 			.snowBtn {
 				position: absolute;
-				top: 50%;
+				top: 70%;
 				width: 6rem;
 				height: 3rem;
 				border-radius: 0.2rem;
@@ -173,6 +192,7 @@
 	</head>
 	<body>
 		<div class="container">
+			<h1 id="output">CLICK ONE OF THE BUTTONS BELOW</h1>
 			<img class="girl" src="./img/140510.jpg" alt="" />
 			<div class="rainBtn" onclick="rainToggle()">
 				<span>RAIN</span>
@@ -183,8 +203,6 @@
 		</div>
 	</body>
 	<script>
-		console.log('working');
-
 		let container = document.querySelector('.container');
 		let rainBtn = document.querySelector('.rainBtn');
 		let snowBtn = document.querySelector('.snowBtn');
@@ -201,30 +219,21 @@
 			element.append(img);
 			element.id = 'divs';
 			img.id = 'imgs';
-			// element.className = 'test';
-			// element.id = 'theDiv';
-			// img.src = path;
-			// img.className = 'theImg';
 		}
 
 		// GETS ALL THE IMAGE TAGS
 		let divs = document.querySelectorAll('#divs');
 		let imgs = document.querySelectorAll('#imgs');
-		// console.log('divs: ', divs.length);
-		// console.log('imgs: ', imgs.length);
 
 		function setProperties(path, elementClass, imgClass) {
 			// LOOPS THROUGH ALL THE IMAGE TAGS
 			for (let x = 0; x < divs.length; x++) {
 				const allDivs = divs[x];
 				const allImgs = imgs[x];
-				console.log(elementClass);
-				console.log(allDivs.className);
 
 				if (elementClass === 'rainDrop') {
 					allImgs.src = path;
 					allImgs.className = imgClass;
-					console.log('for rain ', imgClass);
 					allDivs.className = elementClass;
 
 					let number = Math.random(5) * 10;
@@ -242,7 +251,6 @@
 					allImgs.src = path;
 					allImgs.classList.remove('rainDrop');
 					allImgs.className = imgClass;
-					console.log('for snow ', imgClass);
 
 					allDivs.classList.remove('rainDrop');
 					allDivs.className = elementClass;
@@ -270,26 +278,34 @@
 		let clicked = null;
 
 		function rainToggle() {
+			let output = document.getElementById('output');
+			output.innerHTML = `RAINING...`;
 			if (condition === null || 'snow') {
-				if (clicked === 'rain') prompt(`ITS ALREADY RAINING BRUV!`);
+				if (clicked === 'rain')
+					output.innerHTML = `ITS ALREADY RAINING BRUV!<img src="./img/laughing-emoji.png" class="laughing-emoji"/>`;
+				output.style.fontSize = '7rem';
+
 				condition = 'rain';
 				color = 'rgb(255, 255, 255)';
-				console.log(condition);
 				rainBtn.style.border = `0.2rem solid ${color}`;
 				snowBtn.style.border = `0`;
 
 				setCondition(condition);
+				setProperties();
 			}
 
 			clicked = 'rain';
 		}
 
 		function snowToggle() {
+			let output = document.getElementById('output');
+			output.innerHTML = `SNOWING...`;
 			if (condition === null || 'rain') {
-				if (clicked === 'snow') prompt(`ITS ALREADY SNOWING BRUV!`);
+				if (clicked === 'snow')
+					output.innerHTML = `ITS ALREADY SNOWING BRUV!<img src="./img/laughing-emoji.png" class="laughing-emoji"/>`;
+				output.style.fontSize = '7rem';
 				condition = 'snow';
 				color = 'rgb(40, 40, 255)';
-				console.log(condition);
 				snowBtn.style.border = `0.2rem solid ${color}`;
 				rainBtn.style.border = `0`;
 
@@ -308,53 +324,12 @@
 				path = rain;
 				elementClass = 'rainDrop';
 				imgClass = 'drop';
-				console.log('RAIN : ', path, elementClass, imgClass);
 			} else if (weather === 'snow' || null) {
 				path = snow;
 				elementClass = 'snowFlake';
 				imgClass = 'flake';
-				console.log('SNOW : ', path, elementClass, imgClass);
 			}
 			setProperties(path, elementClass, imgClass);
 		}
-
-		// speed version
-
-		// let snowFlakes = document.querySelectorAll('.snowFlake');
-		// for (let i = 0; i < snowFlakes.length; i++) {
-		// 	let number = Math.random(5) * 10;
-		// 	if (number < 0.2) {
-		// 		number = 0.2;
-		// 	} else if (number > 0.6) {
-		// 		number = 0.6;
-		// 	}
-		// 	snowFlakes[i].style.animationDuration = `${number}s`;
-		// 	snowFlakes[i].style.left = `${Math.random(0) * 100}%`;
-		// 	snowFlakes[i].style.animationDelay = `${Math.random(5) * 10}s`;
-		// }
-
-		// let rainDroplits = document.querySelectorAll('.snowFlake');
-		// for (let i = 0; i < rainDroplits.length; i++) {
-		// 	let number = Math.random(1) * 2;
-		// 	console.log(number);
-
-		// 	if (number <= 0.2) {
-		// 		number = 0.2;
-		// 	} else if (number >= 1.4) {
-		// 		number = 1.4;
-		// 	}
-		// 	rainDroplits[i].style.transform = `scale(${number})`;
-		// }
-
-		// snow
-
-		// let snowFlakes = document.querySelectorAll('.snowFlake');
-		// for (let i = 0; i < snowFlakes.length; i++) {
-		// 	let number = Math.random(5) * 10;
-		// 	if (number < 1) number = 1;
-		// 	snowFlakes[i].style.animationDuration = `${number}s`;
-		// 	snowFlakes[i].style.left = `${Math.random(-4) * 30}rem`;
-		// 	snowFlakes[i].style.animationDelay = `${Math.random(5) * 10}s`;
-		// }
 	</script>
 </html>
