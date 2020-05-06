@@ -30,6 +30,7 @@ body {
 	left: 0;
 	height: 100%;
 	width: 100%;
+	filter: brightness(0.7);
 }
 
 .bg-active {
@@ -98,39 +99,51 @@ body {
 	position: absolute;
 	top: 70%;
 	width: 6rem;
-	height: 3rem;
-	border-radius: 0.2rem;
+	height: 6rem;
+	border-radius: 50%;
 	z-index: 1000;
 }
 
 .rainBtn {
 	left: 50%;
-	background: rgb(40, 40, 255);
+	background: rgba(40, 40, 255, 0.7);
 	color: white;
 	transform: translateX(10%);
 }
 
 .rainBtn:hover {
-	background: rgb(73, 182, 255);
+	background: rgba(73, 182, 255, 0.7);
 }
 
 .snowBtn {
 	right: 50%;
-	background: rgb(255, 255, 255);
+	background: rgba(255, 255, 255, 0.7);
 	color: rgb(0, 0, 0);
 	transform: translateX(-10%);
 }
 
 .snowBtn:hover {
-	background: rgb(196, 196, 196);
+	background: rgba(196, 196, 196, 0.7);
 }
 
 span {
-	font-family: Arial, Helvetica, sans-serif;
-	position: absolute;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
+}
+
+.btnRain,
+.btnSnow {
+	position: absolute;
+	width: 4rem;
+	height: 4rem;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.btnRain {
+	width: 3rem !important;
 }
 
 .container .rainDrop {
