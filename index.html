@@ -284,7 +284,9 @@
 				if (clicked === 'rain')
 					output.innerHTML = `ITS ALREADY RAINING BRUV!<img src="./img/laughing-emoji.png" class="laughing-emoji"/>`;
 				output.style.fontSize = '7rem';
-
+				setTimeout(() => {
+					output.innerHTML = `RAINING...`;
+				}, 3000);
 				condition = 'rain';
 				color = 'rgb(255, 255, 255)';
 				rainBtn.style.border = `0.2rem solid ${color}`;
@@ -304,6 +306,9 @@
 				if (clicked === 'snow')
 					output.innerHTML = `ITS ALREADY SNOWING BRUV!<img src="./img/laughing-emoji.png" class="laughing-emoji"/>`;
 				output.style.fontSize = '7rem';
+				setTimeout(() => {
+					output.innerHTML = `SNOWING...`;
+				}, 3000);
 				condition = 'snow';
 				color = 'rgb(40, 40, 255)';
 				snowBtn.style.border = `0.2rem solid ${color}`;
