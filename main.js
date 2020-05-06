@@ -41,6 +41,9 @@ function setProperties(path, elementClass, imgClass) {
 				number = 1.2;
 			}
 
+			allDivs.style.transform = `scale(${Math.random(1) * 3})`;
+			// if(allDivs.style.transform.scale = `blur(${Math.random(1) * 2})`;)
+			// allDivs.style.filter = `blur(${Math.random(1) * 2})`;
 			allDivs.style.animationDuration = `${number}s`;
 			allDivs.style.left = `${Math.random(0) * 100}%`;
 			allDivs.style.animationDelay = `${Math.random(5) * 10}s`;
@@ -59,14 +62,9 @@ function setProperties(path, elementClass, imgClass) {
 				number = 4;
 			}
 
+			allDivs.style.transform = `scale(${Math.random(1) * 2})`;
 			allDivs.style.animationDuration = `${number}s`;
 			allDivs.style.left = `${Math.random(0) * 100}%`;
-			setInterval(() => {
-				divs[Math.round(Math.random(0) * 200)].style.right = `${
-					Math.random(0) * 100
-				}%`;
-			}, 500);
-
 			allDivs.style.animationDelay = `${Math.random(5) * 10}s`;
 		}
 	}
