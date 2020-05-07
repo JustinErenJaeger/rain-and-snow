@@ -9,7 +9,7 @@ let snow = './img/snow.png';
 let condition = null;
 let color = null;
 
-for (let x = 0; x < 500; x++) {
+for (let x = 0; x < 300; x++) {
 	let element = document.createElement('div');
 	let img = document.createElement('img');
 	container.append(element);
@@ -41,9 +41,7 @@ function setProperties(path, elementClass, imgClass) {
 				number = 1.2;
 			}
 
-			allDivs.style.transform = `scale(${Math.random(1) * 3})`;
-			// if(allDivs.style.transform.scale = `blur(${Math.random(1) * 2})`;)
-			// allDivs.style.filter = `blur(${Math.random(1) * 2})`;
+			allDivs.style.transform = `scale(${Math.random(1) * 4})`;
 			allDivs.style.animationDuration = `${number}s`;
 			allDivs.style.left = `${Math.random(0) * 100}%`;
 			allDivs.style.animationDelay = `${Math.random(5) * 10}s`;
@@ -58,11 +56,11 @@ function setProperties(path, elementClass, imgClass) {
 			let number = Math.random(5) * 10;
 			if (number < 10) {
 				number = 10;
-			} else if (number > 4) {
-				number = 4;
+			} else if (number > 2) {
+				number = 2;
 			}
 
-			allDivs.style.transform = `scale(${Math.random(1) * 2})`;
+			allDivs.style.transform = `scale(${Math.random(1) * 4})`;
 			allDivs.style.animationDuration = `${number}s`;
 			allDivs.style.left = `${Math.random(0) * 100}%`;
 			allDivs.style.animationDelay = `${Math.random(5) * 10}s`;
@@ -84,12 +82,14 @@ function rainToggle() {
 			output.innerHTML = `ITS ALREADY RAINING BRUV!<img src="./img/laughing-emoji.png" class="laughing-emoji"/>`;
 		output.style.fontSize = '6rem';
 		setTimeout(() => {
-			output.innerHTML = `RAINING...`;
+			output.innerHTML = ``;
 		}, 3000);
 		condition = 'rain';
 		color = 'rgb(255, 255, 255)';
+		rainBtn.style.transform = `scale(1.3)`;
 		rainBtn.style.border = `0.2rem solid ${color}`;
 		snowBtn.style.border = `0`;
+		snowBtn.style.transform = `scale(1)`;
 
 		setCondition(condition);
 		setProperties();
@@ -110,12 +110,14 @@ function snowToggle() {
 			output.innerHTML = `ITS ALREADY SNOWING BRUV!<img src="./img/laughing-emoji.png" class="laughing-emoji"/>`;
 		output.style.fontSize = '6rem';
 		setTimeout(() => {
-			output.innerHTML = `SNOWING...`;
+			output.innerHTML = ``;
 		}, 3000);
 		condition = 'snow';
 		color = 'rgb(40, 40, 255)';
 		snowBtn.style.border = `0.2rem solid ${color}`;
+		snowBtn.style.transform = `scale(1.3)`;
 		rainBtn.style.border = `0`;
+		rainBtn.style.transform = `scale(1)`;
 
 		setCondition(condition);
 		setProperties();

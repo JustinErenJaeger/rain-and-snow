@@ -105,10 +105,9 @@ body {
 }
 
 .rainBtn {
-	left: 50%;
+	left: 40%;
 	background: rgba(40, 40, 255, 0.7);
 	color: white;
-	transform: translateX(10%);
 }
 
 .rainBtn:hover {
@@ -116,10 +115,9 @@ body {
 }
 
 .snowBtn {
-	right: 50%;
+	right: 40%;
 	background: rgba(255, 255, 255, 0.7);
 	color: rgb(0, 0, 0);
-	transform: translateX(-10%);
 }
 
 .snowBtn:hover {
@@ -147,7 +145,7 @@ span {
 }
 
 .container .rainDrop {
-	top: -2rem;
+	top: -5rem;
 	position: absolute;
 	width: 1rem;
 	height: 1rem;
@@ -170,7 +168,7 @@ span {
 }
 
 .container .snowFlake {
-	top: -2rem;
+	top: -5rem;
 	position: absolute;
 	width: 0.02rem;
 	height: 0.5rem;
