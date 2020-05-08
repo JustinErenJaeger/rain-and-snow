@@ -8,15 +8,18 @@
 	</head>
 	<body>
 		<div class="container">
-			<h1 id="output">CLICK ONE OF THE BUTTONS BELOW</h1>
-			<img class="bg-1 bg" src="./img/bg-1.jpg" alt="" />
-			<img class="bg-2 bg" src="./img/bg-2.jpg" alt="" />
+			<div class="div box-holder"></div>
+			<img src="" alt="" class="bg-image" />
+
+			<h1 id="output">CLICK ONE</h1>
 			<div class="rainBtn" onclick="rainToggle()">
 				<span><img class="btnRain" src="./img/drop.png" alt="" /></span>
 			</div>
 			<div class="snowBtn" onclick="snowToggle()">
 				<span><img class="btnSnow" src="./img/snow.png" alt="" /></span>
 			</div>
+
+			<img src="./img/mute.png" onclick="muteToggle()" alt="" class="muteBtn" />
 		</div>
 		<script src="./main.js"></script>
 	</body>
